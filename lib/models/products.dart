@@ -33,7 +33,7 @@ List<Product> products = [
   ),
   Product(
     pid: 2,
-    title: "Pink Heels",
+    title: "Olive Heels",
     price: 234,
     size: 8,
     description: dummyText,
@@ -42,7 +42,7 @@ List<Product> products = [
   ),
   Product(
     pid: 3,
-    title: "Black Hat",
+    title: "Gold Pendant",
     price: 234,
     size: 10,
     description: dummyText,
@@ -51,7 +51,7 @@ List<Product> products = [
   ),
   Product(
     pid: 4,
-    title: "Olive Shoes",
+    title: "Brown Shoes",
     price: 234,
     size: 11,
     description: dummyText,
@@ -60,7 +60,7 @@ List<Product> products = [
   ),
   Product(
     pid: 5,
-    title: "Gold Pendant",
+    title: "Black Watch",
     price: 234,
     size: 12,
     description: dummyText,
@@ -69,7 +69,7 @@ List<Product> products = [
   ),
   Product(
     pid: 6,
-    title: "Office Watch",
+    title: "Black Cap",
     price: 234,
     size: 12,
     description: dummyText,
