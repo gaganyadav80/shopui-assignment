@@ -24,16 +24,16 @@ class Product {
 List<Product> products = [
   Product(
     pid: 1,
-    title: "Office Code",
+    title: "Blue Bag",
     price: 234,
     size: 12,
     description: dummyText,
     image: "assets/images/bag_1.png",
-    color: const Color(0xFF3D82AE),
+    color: const Color(0xFF5C9CC5),
   ),
   Product(
     pid: 2,
-    title: "Belt Bag",
+    title: "Pink Heels",
     price: 234,
     size: 8,
     description: dummyText,
@@ -42,7 +42,7 @@ List<Product> products = [
   ),
   Product(
     pid: 3,
-    title: "Hang Top",
+    title: "Black Hat",
     price: 234,
     size: 10,
     description: dummyText,
@@ -51,7 +51,7 @@ List<Product> products = [
   ),
   Product(
     pid: 4,
-    title: "Old Fashion",
+    title: "Olive Shoes",
     price: 234,
     size: 11,
     description: dummyText,
@@ -60,7 +60,7 @@ List<Product> products = [
   ),
   Product(
     pid: 5,
-    title: "Office Code",
+    title: "Gold Pendant",
     price: 234,
     size: 12,
     description: dummyText,
@@ -69,7 +69,7 @@ List<Product> products = [
   ),
   Product(
     pid: 6,
-    title: "Office Code",
+    title: "Office Watch",
     price: 234,
     size: 12,
     description: dummyText,

@@ -1,3 +1,5 @@
+import 'package:dharvya_assignment/constants.dart';
+import 'package:dharvya_assignment/screens/stores_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,10 +17,12 @@ class MyApp extends StatelessWidget {
         designSize: const Size(414, 896),
         builder: () {
           return MaterialApp(
-            title: 'Flutter Demo',
+            title: 'Shopping Stores',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-              primarySwatch: Colors.blue,
+              textTheme:
+                  Theme.of(context).textTheme.apply(bodyColor: kTextColor),
+              visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
             home: const MyHomePage(title: 'Flutter Demo Home Page'),
           );
@@ -38,6 +42,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const StoresScreen();
   }
 }

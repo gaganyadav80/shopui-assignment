@@ -16,7 +16,7 @@ List<Store> stores = <Store>[
     image: 'assets/images/st_1.png',
     title: 'Store 1',
     description:
-        "Velit esse ea nulla exercitation esse labore occaecat tempor deserunt",
+        "Velit esse ea nulla exercitation esse labore occaecat tempor deserunt.",
     location: "Gurgaon, Haryana",
   ),
   Store(
