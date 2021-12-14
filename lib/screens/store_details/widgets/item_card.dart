@@ -1,7 +1,7 @@
 import 'package:dharvya_assignment/models/products.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../constants.dart';
+import '../../../../../constants.dart';
 
 class ItemCard extends StatelessWidget {
   final Product? product;
@@ -47,7 +47,7 @@ class ItemCard extends StatelessWidget {
           Text(
             "\$${product?.price}",
             style: const TextStyle(fontWeight: FontWeight.bold),
-          )
+          ),
         ],
       ),
     );

@@ -1,6 +1,47 @@
+import 'package:dharvya_assignment/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../constants.dart';
+class SliverStoreCategories extends StatelessWidget {
+  const SliverStoreCategories({Key? key, required this.tabController})
+      : super(key: key);
+
+  final TabController tabController;
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      automaticallyImplyLeading: false,
+      elevation: 0.0,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      pinned: true,
+      toolbarHeight: 0.0,
+      flexibleSpace: FlexibleSpaceBar(
+        titlePadding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
+        centerTitle: false,
+        title: TabBar(
+          controller: tabController,
+          tabs: const [
+            Tab(text: "Products"),
+            Tab(text: "Gallery"),
+            Tab(text: "Review"),
+            Tab(text: "Info"),
+          ],
+          isScrollable: true,
+          unselectedLabelColor: kTextLightColor,
+          labelColor: Colors.black,
+          labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+          indicatorColor: Colors.black,
+          labelPadding: EdgeInsets.only(left: 0.0, right: 32.w),
+          indicator: UnderlineTabIndicator(
+            borderSide: const BorderSide(width: 2.0),
+            insets: EdgeInsets.only(left: 0.0, right: 32.w),
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 class Categories extends StatefulWidget {
   const Categories({Key? key}) : super(key: key);

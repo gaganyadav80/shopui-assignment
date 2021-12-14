@@ -1,96 +1,64 @@
-import 'package:dharvya_assignment/constants.dart';
-import 'package:dharvya_assignment/models/products.dart';
-import 'package:dharvya_assignment/models/store.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:dharvya_assignment/models/store.dart';
 
-import 'categories.dart';
-import '../product_details/details_screen.dart';
-import 'item_card.dart';
+import 'widgets/categories.dart';
+import 'widgets/products_body.dart';
 
-class StoreDetailScreen extends StatelessWidget {
+class StoreDetailScreen extends StatefulWidget {
   const StoreDetailScreen({Key? key, this.store}) : super(key: key);
 
   final Store? store;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppbar(context),
-      body: StoreDetailBody(store: store),
-    );
-  }
-
-  AppBar _buildAppbar(BuildContext context) {
-    return AppBar(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      elevation: 0,
-      leading: IconButton(
-        splashRadius: 30.w,
-        icon: const Icon(CupertinoIcons.back, color: Colors.black),
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-      // actions: <Widget>[
-      //   IconButton(
-      //     splashRadius: 30.w,
-      //     icon: const Icon(CupertinoIcons.search, color: Colors.black),
-      //     onPressed: () {},
-      //   ),
-      //   SizedBox(width: 20.w)
-      // ],
-    );
-  }
+  State<StoreDetailScreen> createState() => _StoreDetailScreenState();
 }
 
-class StoreDetailBody extends StatelessWidget {
-  const StoreDetailBody({Key? key, this.store}) : super(key: key);
+class _StoreDetailScreenState extends State<StoreDetailScreen>
+    with SingleTickerProviderStateMixin {
+  TabController? _tabController;
 
-  final Store? store;
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 4, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-          child: Text(
-            "${store?.title}",
-            style: Theme.of(context)
-                .textTheme
-                .headline5
-                ?.copyWith(fontWeight: FontWeight.bold),
-          ),
+    return Scaffold(
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool value) {
+          return [
+            _buildStoreAppbar(),
+            SliverStoreCategories(tabController: _tabController!),
+          ];
+        },
+        body: TabBarView(
+          controller: _tabController,
+          children: [
+            const StoreProductsBody(),
+            Container(),
+            Container(),
+            Container(),
+          ],
         ),
-        const Categories(),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: kDefaultPaddin),
-            child: GridView.builder(
-              itemCount: products.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: kDefaultPaddin,
-                crossAxisSpacing: kDefaultPaddin,
-                childAspectRatio: 0.75,
-              ),
-              itemBuilder: (context, index) => ItemCard(
-                product: products[index],
-                press: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DetailsScreen(
-                        product: products[index],
-                      ),
-                    )),
-              ),
-            ),
-          ),
-        ),
-      ],
+      ),
+    );
+  }
+
+  CupertinoSliverNavigationBar _buildStoreAppbar() {
+    return CupertinoSliverNavigationBar(
+      padding: EdgeInsetsDirectional.zero,
+      leading: IconButton(
+        splashRadius: 30.w,
+        icon: const Icon(CupertinoIcons.back, color: Colors.black),
+        onPressed: () => Navigator.pop(context),
+      ),
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      border: Border.all(color: Theme.of(context).scaffoldBackgroundColor),
+      largeTitle: Text("${widget.store?.title}"),
     );
   }
 }

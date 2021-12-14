@@ -76,6 +76,42 @@ List<Product> products = [
     image: "assets/images/bag_6.png",
     color: const Color(0xFFAEAEAE),
   ),
+  Product(
+    pid: 7,
+    title: "Blue Bag",
+    price: 234,
+    size: 12,
+    description: dummyText,
+    image: "assets/images/bag_1.png",
+    color: const Color(0xFF5C9CC5),
+  ),
+  Product(
+    pid: 8,
+    title: "Olive Heels",
+    price: 234,
+    size: 8,
+    description: dummyText,
+    image: "assets/images/bag_2.png",
+    color: const Color(0xFFD3A984),
+  ),
+  Product(
+    pid: 9,
+    title: "Gold Pendant",
+    price: 234,
+    size: 10,
+    description: dummyText,
+    image: "assets/images/bag_3.png",
+    color: const Color(0xFF989493),
+  ),
+  Product(
+    pid: 10,
+    title: "Brown Shoes",
+    price: 234,
+    size: 11,
+    description: dummyText,
+    image: "assets/images/bag_4.png",
+    color: const Color(0xFFE6B398),
+  ),
 ];
 
 String dummyText =

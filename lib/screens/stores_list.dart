@@ -7,8 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'store_details/store_details.dart';
 
-class StoresScreen extends StatelessWidget {
-  const StoresScreen({Key? key}) : super(key: key);
+class StoresListScreen extends StatelessWidget {
+  const StoresListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class BuildStoreListCard extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: BuildStoreDetails(store: store),
+                  child: BuildStoreListCardDetails(store: store),
                 ),
               ],
             ),
@@ -82,8 +82,8 @@ class BuildStoreListCard extends StatelessWidget {
   }
 }
 
-class BuildStoreDetails extends StatelessWidget {
-  const BuildStoreDetails({Key? key, this.store}) : super(key: key);
+class BuildStoreListCardDetails extends StatelessWidget {
+  const BuildStoreListCardDetails({Key? key, this.store}) : super(key: key);
 
   final Store? store;
 
