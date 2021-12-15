@@ -48,6 +48,11 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
-	
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To select images to upload in user review</string>
+	<key>NSCameraUsageDescription</key>
+	<string>To click pictures to upload in user review</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>To click pictures to upload in user review</string>
 </dict>
 </plist>

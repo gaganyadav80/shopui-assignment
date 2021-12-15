@@ -2,7 +2,6 @@ import 'package:dharvya_assignment/models/products.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../constants.dart';
 import 'components/body.dart';
 
 class DetailsScreen extends StatelessWidget {
@@ -22,8 +21,8 @@ class DetailsScreen extends StatelessWidget {
     return AppBar(
       backgroundColor: product.color,
       elevation: 0,
-      leading: IconButton(
-        icon: const Icon(CupertinoIcons.back, color: Colors.white),
+      leading: CupertinoNavigationBarBackButton(
+        color: Colors.black,
         onPressed: () => Navigator.pop(context),
       ),
     );

@@ -7,6 +7,7 @@ class RatingModel extends Equatable {
   final int rating;
   final Timestamp date;
   final String review;
+  // final List<String> imageURL;
 
   const RatingModel({
     required this.uid,
@@ -14,6 +15,7 @@ class RatingModel extends Equatable {
     required this.rating,
     required this.date,
     required this.review,
+    // required this.imageURL,
   });
 
   @override
@@ -26,6 +28,7 @@ class RatingModel extends Equatable {
       rating.hashCode ^
       date.hashCode ^
       review.hashCode;
+  // imageURL.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -36,6 +39,7 @@ class RatingModel extends Equatable {
           name == other.name &&
           rating == other.rating &&
           date == other.date &&
+          // imageURL == other.imageURL &&
           review == other.review;
 
   @override
@@ -50,6 +54,7 @@ class RatingModel extends Equatable {
       rating: snap.data()?['rating'] as int,
       date: snap.data()?['date'] as Timestamp,
       review: snap.data()?['review'] as String,
+      // imageURL: snap.data()?['imageURL'],
     );
   }
 
@@ -59,7 +64,8 @@ class RatingModel extends Equatable {
       "name": name,
       "rating": rating,
       "date": date,
-      "review": review
+      "review": review,
+      // "imageURL": imageURL,
     };
   }
 }

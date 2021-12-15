@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dharvya_assignment/constants.dart';
 import 'package:dharvya_assignment/models/ratings.dart';
+import 'package:dharvya_assignment/screens/store_details/review_page/firebase_storage_func.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -33,41 +34,56 @@ class _StoreReviewListState extends State<StoreReviewList> {
         sort(sortby);
 
         return Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          // crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            SizedBox(
-              height: 40.0,
-              child: TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.black12,
-                  primary: Colors.black12,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Icon(CupertinoIcons.sort_down_circle,
-                        color: Colors.black),
-                    const SizedBox(width: 8),
-                    sortby == 0
-                        ? const Text("High to Low",
-                            style: TextStyle(color: Colors.black))
-                        : const Text("Low to High",
-                            style: TextStyle(color: Colors.black)),
-                  ],
-                ),
-                onPressed: () => showModalBottomSheet(
-                  context: context,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  "Reviews",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
                   ),
-                  builder: (context) {
-                    return StoreReviewSortDialog(
-                        decSortby: decSortby,
-                        incSortby: incSortby,
-                        sortBy: sortby);
-                  },
                 ),
-              ),
+                SizedBox(
+                  height: 35.0,
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.black12,
+                      primary: Colors.black12,
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          CupertinoIcons.sort_down_circle,
+                          color: Colors.black,
+                        ),
+                        const SizedBox(width: 8),
+                        sortby == 0
+                            ? const Text("High to Low",
+                                style: TextStyle(color: Colors.black))
+                            : const Text("Low to High",
+                                style: TextStyle(color: Colors.black)),
+                      ],
+                    ),
+                    onPressed: () => showModalBottomSheet(
+                      context: context,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24.0),
+                      ),
+                      builder: (context) {
+                        return StoreReviewSortDialog(
+                            decSortby: decSortby,
+                            incSortby: incSortby,
+                            sortBy: sortby);
+                      },
+                    ),
+                  ),
+                ),
+              ],
             ),
             Column(
               children: List.generate(_ratingsList.length, (index) {
@@ -133,6 +149,51 @@ class _StoreReviewListState extends State<StoreReviewList> {
                           _ratingsList[index].review,
                           style: const TextStyle(fontSize: 16.0),
                         ),
+                      ),
+                      FutureBuilder<List<ReviewImage>>(
+                        future: FirebaseApi.listAll(
+                            '${widget.storeid}/${_ratingsList[index].uid}'),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                                child: CupertinoActivityIndicator());
+                          }
+                          if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                            return const SizedBox.shrink();
+                          }
+                          if (snapshot.hasError) {
+                            return const Center(
+                                child: Text('Some error occurred!'));
+                          } else {
+                            final files = snapshot.data!;
+                            //     .where((element) => element.name
+                            //         .contains(_ratingsList[index].uid))
+                            //     .toList();
+
+                            return Container(
+                              width: MediaQuery.of(context).size.width,
+                              margin: const EdgeInsets.only(top: 10.0),
+                              height: 100,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: files.length,
+                                itemBuilder: (context, imgIdx) {
+                                  return Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0),
+                                    child: Image.network(
+                                      files[imgIdx].url,
+                                      fit: BoxFit.cover,
+                                      height: 100,
+                                      width: 100,
+                                    ),
+                                  );
+                                },
+                              ),
+                            );
+                          }
+                        },
                       ),
                     ],
                   ),

@@ -47,8 +47,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    // log("${MediaQuery.of(context).size.height}");
-    // log("${MediaQuery.of(context).size.width}");
     return const StoresListScreen();
   }
 }
