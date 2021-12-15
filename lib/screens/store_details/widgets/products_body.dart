@@ -24,7 +24,7 @@ class StoreProductsBody extends StatelessWidget {
               crossAxisSpacing: kDefaultPaddin,
               childAspectRatio: 0.75,
             ),
-            itemBuilder: (context, index) => ItemCard(
+            itemBuilder: (BuildContext context, int index) => ItemCard(
               product: products[index],
               press: () => Navigator.push(
                   context,

@@ -23,20 +23,9 @@ class DetailsScreen extends StatelessWidget {
       backgroundColor: product.color,
       elevation: 0,
       leading: IconButton(
-        icon: const Icon(CupertinoIcons.back, color: Colors.black),
+        icon: const Icon(CupertinoIcons.back, color: Colors.white),
         onPressed: () => Navigator.pop(context),
       ),
-      actions: <Widget>[
-        IconButton(
-          icon: const Icon(CupertinoIcons.search, color: Colors.black),
-          onPressed: () {},
-        ),
-        IconButton(
-          icon: const Icon(CupertinoIcons.cart, color: Colors.black),
-          onPressed: () {},
-        ),
-        const SizedBox(width: kDefaultPaddin / 2)
-      ],
     );
   }
 }

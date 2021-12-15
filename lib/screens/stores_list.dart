@@ -1,9 +1,8 @@
 import 'package:dharvya_assignment/constants.dart';
 import 'package:dharvya_assignment/models/store.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:velocity_x/velocity_x.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'store_details/store_details.dart';
 
@@ -17,9 +16,13 @@ class StoresListScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         automaticallyImplyLeading: false,
-        title: "HOME".text.bold.xl5.color(kTextColor).make(),
+        title: const Text("HOME"),
+        titleTextStyle: GoogleFonts.limelight(
+          fontWeight: FontWeight.bold,
+          color: kTextColor,
+          fontSize: 34.0,
+        ),
         centerTitle: false,
-        titleTextStyle: GoogleFonts.limelight(),
         elevation: 0.0,
       ),
       body: Padding(
@@ -35,9 +38,9 @@ class StoresListScreen extends StatelessWidget {
 }
 
 class BuildStoreListCard extends StatelessWidget {
-  const BuildStoreListCard({Key? key, this.store}) : super(key: key);
+  const BuildStoreListCard({Key? key, required this.store}) : super(key: key);
 
-  final Store? store;
+  final Store store;
 
   @override
   Widget build(BuildContext context) {
@@ -105,14 +108,15 @@ class BuildStoreListCardDetails extends StatelessWidget {
             ),
             SizedBox(height: 10.w),
             SizedBox(
-              width: 230.w,
-              child: Text(
-                "${store?.description}",
-              ),
-            ),
+                width: 200.w,
+                child: Text(
+                    "${store?.description?.substring(0, 65)} ${store?.description?.substring(0, 65)} ")),
           ],
         ),
-        "${store?.location}".text.bold.make(),
+        Text(
+          "${store?.location}",
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
       ],
     );
   }
