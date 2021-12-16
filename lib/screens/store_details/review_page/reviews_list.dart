@@ -150,50 +150,9 @@ class _StoreReviewListState extends State<StoreReviewList> {
                           style: const TextStyle(fontSize: 16.0),
                         ),
                       ),
-                      FutureBuilder<List<ReviewImage>>(
-                        future: FirebaseApi.listAll(
-                            '${widget.storeid}/${_ratingsList[index].uid}'),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const Center(
-                                child: CupertinoActivityIndicator());
-                          }
-                          if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                            return const SizedBox.shrink();
-                          }
-                          if (snapshot.hasError) {
-                            return const Center(
-                                child: Text('Some error occurred!'));
-                          } else {
-                            final files = snapshot.data!;
-                            //     .where((element) => element.name
-                            //         .contains(_ratingsList[index].uid))
-                            //     .toList();
-
-                            return Container(
-                              width: MediaQuery.of(context).size.width,
-                              margin: const EdgeInsets.only(top: 10.0),
-                              height: 100,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: files.length,
-                                itemBuilder: (context, imgIdx) {
-                                  return Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 4.0),
-                                    child: Image.network(
-                                      files[imgIdx].url,
-                                      fit: BoxFit.cover,
-                                      height: 100,
-                                      width: 100,
-                                    ),
-                                  );
-                                },
-                              ),
-                            );
-                          }
-                        },
+                      ReviewImagesFutureBldr(
+                        storeid: widget.storeid,
+                        userid: _ratingsList[index].uid,
                       ),
                     ],
                   ),
@@ -224,6 +183,65 @@ class _StoreReviewListState extends State<StoreReviewList> {
     setState(() {
       sortby = 1;
     });
+  }
+}
+
+class ReviewImagesFutureBldr extends StatefulWidget {
+  const ReviewImagesFutureBldr({
+    Key? key,
+    required this.storeid,
+    required this.userid,
+  }) : super(key: key);
+
+  final String storeid, userid;
+
+  @override
+  _ReviewImagesFutureBldrState createState() => _ReviewImagesFutureBldrState();
+}
+
+class _ReviewImagesFutureBldrState extends State<ReviewImagesFutureBldr> {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<ReviewImage>>(
+      future: FirebaseApi.listAll('${widget.storeid}/${widget.userid}'),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CupertinoActivityIndicator());
+        }
+        if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return const SizedBox.shrink();
+        }
+        if (snapshot.hasError) {
+          return const Center(child: Text('Some error occurred!'));
+        } else {
+          final files = snapshot.data!;
+          //     .where((element) => element.name
+          //         .contains(_ratingsList[index].uid))
+          //     .toList();
+
+          return Container(
+            width: MediaQuery.of(context).size.width,
+            margin: const EdgeInsets.only(top: 10.0),
+            height: 100,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: files.length,
+              itemBuilder: (context, imgIdx) {
+                return Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  child: Image.network(
+                    files[imgIdx].url,
+                    fit: BoxFit.cover,
+                    height: 100,
+                    width: 100,
+                  ),
+                );
+              },
+            ),
+          );
+        }
+      },
+    );
   }
 }
 
